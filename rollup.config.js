@@ -7,7 +7,7 @@ export default {
     input: "src/index.ts",
     output: {
         plugins: [terser()],
-        dir: "dist",
+        dir: "docs",
         format: "iife",
         sourcemap: true,
     }
