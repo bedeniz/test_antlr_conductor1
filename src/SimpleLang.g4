@@ -2,17 +2,14 @@ grammar SimpleLang;
 
 prog: expr EOF;
 
-expr: expr '+' factor      # Add
-    | factor               # ToFactor
+expr: primary (op primary)*;   // All binary operators are at the same level
+
+primary
+    : INT                   # Int
+    | '(' expr ')'          # Parens
     ;
 
-factor: factor '*' atom    # Multiply
-      | atom               # ToAtom
-      ;
-
-atom: INT                  # Int
-    | '(' expr ')'         # Parens
-    ;
+op: '+' | '*';
 
 INT: [0-9]+;
 WS: [ \t\r\n]+ -> skip;
