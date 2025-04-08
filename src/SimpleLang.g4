@@ -1,16 +1,26 @@
 grammar SimpleLang;
 
+// A program is an expression followed by EOF.
 prog: expr EOF;
 
-expr: primary (op primary)*;   // All binary operators have equal precedence
+// An expression supports addition.
+expr
+    : expr '+' factor   # Add
+    | factor            # ToFactor
+    ;
 
-primary
+// A factor supports multiplication.
+factor
+    : factor '*' atom   # Multiply
+    | atom              # ToAtom
+    ;
+
+// An atom is either an integer or a parenthesized expression.
+atom
     : INT               # Int
     | '(' expr ')'      # Parens
     ;
 
-op: '+' | '*';
-
+// Lexer rules.
 INT: [0-9]+;
 WS: [ \t\r\n]+ -> skip;
-
