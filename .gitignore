@@ -1,6 +1,4 @@
 node_modules/
-dist/
-!dist/index.js
 
 .yarn/*
 !.yarn/patches
